@@ -17,16 +17,26 @@ colors = ['r','y','g','c','b','m','k']
 Z = 0 #for use with the response plots
 z = 0 #for use with the attenuation plots
 
-print('Getting Asset Tag for Bay 0')
-lhsbay=S.get_amc_asset_tag(0)
+pAuto = input("Read Boards to obtain Asset Tags? <y/n>:")
+if Auto == "n":
+	lhsbay = input("Enter Asset Tag for Bay 0:")
+	rhsbay = input("Enter Asset Tag for Bay 1:")
+elif Auto =="y":
+	print('Getting Asset Tag for Bay 0')
+	lhsbay=S.get_amc_asset_tag(0)
+	
+	print('Getting Asset Tag for Bay 1')   
+	rhsbay=S.get_amc_asset_tag(1)
+else:
+    print("No board info available, aborting test")
+    exit	
+
+
 if re.split('-|_',lhsbay)[1] == 'A02':
    LBoardType = 'high'
-
 else:
    LBoardType = 'low'
 
-print('Getting Asset Tag for Bay 1')   
-rhsbay=S.get_amc_asset_tag(1)
 if re.split('-|_',rhsbay)[1] == 'A02':
    RBoardType = 'high'
 else:
